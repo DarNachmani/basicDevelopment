@@ -74,4 +74,15 @@ public class RndExercises
                 return IsPalindrome( str.Substring( 1, str.Length-2 ) );
         }   
     }
+
+    public void WhenToUseEachLoop()
+    {
+        // I will use a for loop when I know the specific number of times the loop will happen.
+        // I will use a while loop when I only know the condition I want the loop to happen in, but do not know the number of times it is going to happen.
+    }
+
+    public Dictionary<string, int> Ex5(List<string> strs)
+    {
+        
+    }
 }
