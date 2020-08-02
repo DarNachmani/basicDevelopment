@@ -5,10 +5,10 @@ public class Stock
 	public List<Tuple<int, int>> inventory;
 	public int countOfMasks, profit;
 
-	public Stock(int countOfMasks)
+	public Stock(int countOfMasksSold)
 	{
 		this.inventory = new List<Tuple<int, int>>();
-		this.countOfMasks = countOfMasks;
+		this.countOfMasksSold = countOfMasksSold;
 		this.profit = 0;
 	}
 
@@ -20,6 +20,7 @@ public class Stock
             {
 				mask[0] -= quantity;
 				this.profit = quantity * price;
+				this.countOfMasksSold += quantity;
             }
 		}
 		
@@ -44,5 +45,15 @@ public class Stock
 				quantity -= mask[0];
             }
         }
+    }
+
+	public int NumOfSold()
+    {
+		return this.countOfMasksSold;
+    }
+
+	public string ToString()
+    {
+		return string.Format("From stock number {}")
     }
 }
