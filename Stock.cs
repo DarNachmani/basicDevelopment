@@ -54,6 +54,6 @@ public class Stock
 
 	public string ToString()
     {
-		return string.Format("From stock number {}")
+		return string.Format("From stock number {}");
     }
 }
