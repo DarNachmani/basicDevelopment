@@ -1,5 +1,13 @@
 using System;
+using System.Collections;
 
+enum Weather
+{
+    Winter,
+    Fall,
+    Spring,
+    Summer
+}
 public class RndExercises
 {
     public int CountOfCharInString(string s, char c)
@@ -75,10 +83,35 @@ public class RndExercises
         }   
     }
 
-    public void WhenToUseEachLoop()
+    public List<int> ReverseListStack(List<int> lst)
     {
-        // I will use a for loop when I know the specific number of times the loop will happen.
-        // I will use a while loop when I only know the condition I want the loop to happen in, but do not know the number of times it is going to happen.
+        Stack<int> stack = new Stack<int>();
+        foreach(var elm in lst)
+        {
+            stack.Push(elm);
+        }
+        List<int> newList = new List<int>();
+        foreach(var s in stack)
+        {
+            newList.Add(s);
+        }
+
+        return newList;
+    }
+
+    public List<int> ReverseListRecursive(List<int> lst, int first, int last)
+    {
+        if(lst.Count <= 1)
+        {
+            return lst;
+        }
+        else
+        {
+            int temp = lst[first];
+            lst[first] = lst[last];
+            lst[last = temp];
+            ReverseListRecursive(lst, first+1, last-1);
+        }
     }
 
     public Dictionary<string, int> Ex5(List<string> strs)
@@ -96,6 +129,25 @@ public class RndExercises
             }
         }
         return countOfStrings;
+    }
+
+    public void SeasonOfTheYear(Weather w)
+    {
+        switch(w)
+        {
+            case w.Winter:
+                Console.WriteLine("Even though it is rainy outside, it is so hot");
+                break;
+            case w.Fall:
+                Console.WriteLine("The crunchy sound of the leaves is amazing");
+                break;
+            case w.Spring:
+                Console.WriteLine("The view is the best when the flowers are blooming");
+                break;
+            case w.Summer:
+                Console.WriteLine("It is so hot even the sun is sweating");
+                break;
+        }
     }
 
     public void DifferenceBetweenMainElement(int[] arr)
