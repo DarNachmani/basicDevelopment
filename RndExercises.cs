@@ -1,12 +1,14 @@
 using System;
 using System.Collections;
+using System.Collections.Generic;
+using System.Linq;
 
-enum Weather
+public enum Weather
 {
-    Winter,
-    Fall,
-    Spring,
-    Summer
+    Winter = 1,
+    Fall = 2,
+    Spring = 3,
+    Summer = 4
 }
 public class RndExercises
 {
@@ -14,10 +16,11 @@ public class RndExercises
     {
         int count = 0;
         var arr = s.ToCharArray();
-        foreach(char chr in arr)
+        foreach (char chr in arr)
         {
-            if(chr == c){
-                count ++;
+            if (chr == c)
+            {
+                count++;
             }
         }
         return count;
@@ -26,8 +29,10 @@ public class RndExercises
     public int LargestInArray(int[] arr)
     {
         int largest = arr[0];
-        for(int i=1; i<arr.Length-1; i++){
-            if(largest < arr[i]){
+        for (int i = 1; i < arr.Length - 1; i++)
+        {
+            if (largest < arr[i])
+            {
                 largest = arr[i];
             }
         }
@@ -37,25 +42,26 @@ public class RndExercises
     public bool ContainsDoubleDigit(int num)
     {
         int temp = 0;
-        while(num > 0)
+        while (num > 0)
         {
             temp = num % 10;
-            if(temp % 2 == 0)
+            if (temp % 2 == 0)
             {
                 return true;
             }
             num /= 10;
         }
+        return false;
     }
 
     public int ReversedNum(int num)
     {
         int temp = 0;
         int reversedNumber = 0;
-        while(num > 0)
+        while (num > 0)
         {
             temp = num % 10;
-            reversedNumber = reversedNumbern * 10 + temp;
+            reversedNumber = reversedNumber * 10 + temp;
             num /= 10;
         }
         return reversedNumber;
@@ -63,35 +69,35 @@ public class RndExercises
 
     public int FirstRecursiveEx(int n)
     {
-        if(n == 0)
+        if (n == 0)
         {
             return 2;
         }
-        return 2*FirstRecursiveEx(n-1) + 3; 
+        return 2 * FirstRecursiveEx(n - 1) + 3;
     }
 
-    public bool IsPolindrom(string str)
+    public bool IsPalindrome(string str)
     {
         if (str.Length <= 1)
             return true;
         else
         {
-            if ( str[0] != str[ text.Length - 1 ] )
+            if (str[0] != str[str.Length - 1])
                 return false;
             else
-                return IsPalindrome( str.Substring( 1, str.Length-2 ) );
-        }   
+                return IsPalindrome(str.Substring(1, str.Length - 2));
+        }
     }
 
     public List<int> ReverseListStack(List<int> lst)
     {
         Stack<int> stack = new Stack<int>();
-        foreach(var elm in lst)
+        foreach (var elm in lst)
         {
             stack.Push(elm);
         }
         List<int> newList = new List<int>();
-        foreach(var s in stack)
+        foreach (var s in stack)
         {
             newList.Add(s);
         }
@@ -101,7 +107,7 @@ public class RndExercises
 
     public List<int> ReverseListRecursive(List<int> lst, int first, int last)
     {
-        if(lst.Count <= 1)
+        if (last == first - 1)
         {
             return lst;
         }
@@ -109,19 +115,19 @@ public class RndExercises
         {
             int temp = lst[first];
             lst[first] = lst[last];
-            lst[last = temp];
-            ReverseListRecursive(lst, first+1, last-1);
+            lst[last] = temp;
+            return ReverseListRecursive(lst, first + 1, last - 1);
         }
     }
 
     public Dictionary<string, int> Ex5(List<string> strs)
     {
         Dictionary<string, int> countOfStrings = new Dictionary<string, int>();
-        foreach(var str in strs)
+        foreach (var str in strs)
         {
-            if(countOfStrings.Keys.Contains(str))
+            if (countOfStrings.Keys.Contains(str))
             {
-                countOfStrings[str] ++;
+                countOfStrings[str]++;
             }
             else
             {
@@ -133,18 +139,19 @@ public class RndExercises
 
     public void SeasonOfTheYear(Weather w)
     {
-        switch(w)
+        int i = (int)w;
+        switch (i)
         {
-            case w.Winter:
+            case 1:
                 Console.WriteLine("Even though it is rainy outside, it is so hot");
                 break;
-            case w.Fall:
+            case 2:
                 Console.WriteLine("The crunchy sound of the leaves is amazing");
                 break;
-            case w.Spring:
+            case 3:
                 Console.WriteLine("The view is the best when the flowers are blooming");
                 break;
-            case w.Summer:
+            case 4:
                 Console.WriteLine("It is so hot even the sun is sweating");
                 break;
         }
@@ -152,12 +159,12 @@ public class RndExercises
 
     public void DifferenceBetweenMainElement(int[] arr)
     {
-        int mainElement = 13;
-        for(int i=0; i<arr.Length; i++)
+        int mainElementIndex = 12;
+        for (int i = 0; i < arr.Length; i++)
         {
-            if(i != mainElement)
+            if (i != mainElementIndex && i % 2 == 0)
             {
-                Console.WriteLine(Math.Abs(mainElement - arr[i]));
+                Console.WriteLine(Math.Abs(arr[mainElementIndex] - arr[i]));
             }
         }
     }
@@ -167,11 +174,11 @@ public class RndExercises
         int index = 0;
         int i = 0;
         int count = 0;
-        while(index != -1)
+        while (index != -1)
         {
             index = str.IndexOf(tat, i);
-            i += tat.Length;
-            count ++;
+            i += index + tat.Length;
+            count++;
         }
 
         return count;
@@ -181,57 +188,71 @@ public class RndExercises
     {
         int sumOfFirstRow = 0;
         int sumOfSecondRow = 0;
-        for(int i=0; i<arr.GetLength(1); i++)
+        for (int i = 0; i < arr.GetLength(1); i++)
         {
             sumOfFirstRow += arr[rowNum1, i];
             sumOfSecondRow += arr[rowNum2, i];
         }
-        if(sumOfFirstRow == sumOfSecondRow)
+        if (sumOfFirstRow == sumOfSecondRow)
         {
             return 1;
         }
         return 0;
     }
 
-    public void BuildArray(int n)
+    public int[] BuildArray(int n)
     {
         var rnd = new Random();
         int countOfInputs = 0;
         int[] arr = new int[n];
         int doubleIndex = 0;
         int oddIndex = 1;
-        while(countOfInputs < n)
+        int rndNum;
+        while (countOfInputs < n)
         {
             rndNum = rnd.Next(10, 100);
-            if(rndNum % 2 == 0)
+            if (rndNum % 2 == 0)
             {
-                if(doubleIndex < arr.Length - 2)
+                if (doubleIndex < arr.Length - 2)
                 {
                     arr[doubleIndex] = rndNum;
                     doubleIndex += 2;
-                    countOfInputs ++;
+                    countOfInputs++;
+                }
+                else if (arr.Length == 2 && doubleIndex == 0)
+                {
+                    arr[0] = rndNum;
+                    countOfInputs++;
+                    doubleIndex += 2;
                 }
             }
             else
             {
-                if(oddIndex < arr.Length - 2)
+                if (oddIndex < arr.Length - 2)
                 {
                     arr[oddIndex] = rndNum;
                     oddIndex += 2;
-                    countOfInputs ++;
+                    countOfInputs++;
+                }
+                else if (arr.Length == 2)
+                {
+                    arr[1] = rndNum;
+                    countOfInputs++;
+                    oddIndex += 2;
                 }
             }
         }
+        return arr;
     }
 
     public int StringLengthEqualsToNum(string[] arr, int num)
     {
         int count = 0;
-        foreach(var str in arr)
+        foreach (var str in arr)
         {
-            if(num == str.Length)
+            if (num == str.Length)
             {
-                count ++;
+                count++;
             }
         }
         return count;
