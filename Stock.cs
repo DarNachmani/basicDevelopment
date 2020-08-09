@@ -75,7 +75,7 @@ public class Stock
 		string finalString = "";
 		for (int i = 0; i < 5; i++)
 		{
-			finalString += string.Format("From stock number {0} there are {1} masks", i + 1, this.inventory[i].Item1);
+			finalString += string.Format("From stock number {0} there are {1} masks\n", i + 1, this.inventory[i].Item1);
 		}
 		return finalString;
 	}
