@@ -2,36 +2,35 @@
 
 public class Stock
 {
-	public Tuple<int, double>[] inventory;
-	public int countOfMasksSold;
-	public double profit;
+	private Tuple<int, double>[] _inventory;
+	private int _countOfMasksSold;
+	private double _profit;
 
-	public Stock(Tuple<int, double>[] arr)
+	public Stock(Tuple<int, double>[] inventory)
 	{
-		this.inventory = arr;
-		this.countOfMasksSold = 0;
-		this.profit = 0;
+		_inventory = inventory;
+		_countOfMasksSold = 0;
+		_profit = 0;
 	}
 
 	public void Buy(int quantity, double price)
 	{
-		double tempQuantity = 0;
-		for (int i = 0; i < this.inventory.Length; i++)
+		for (int i = 0; i < _inventory.Length; i++)
 		{
-			var mask = this.inventory[i];
+			var maskInformation = _inventory[i];
 			while (quantity > 0)
 			{
-				if (mask.Item1 >= quantity)
+				if (maskInformation.Item1 >= quantity)
 				{
-					this.inventory[i] = Tuple.Create(mask.Item1 - quantity, mask.Item2);
-					this.profit = quantity * price;
-					this.countOfMasksSold += quantity;
+					_inventory[i] = Tuple.Create(maskInformation.Item1 - quantity, maskInformation.Item2);
+					_profit = quantity * price;
+					_countOfMasksSold += quantity;
 					quantity = 0;
 				}
 				else
 				{
-					quantity -= mask.Item1;
-					this.inventory[i] = Tuple.Create(0, mask.Item2);
+					quantity -= maskInformation.Item1;
+					_inventory[i] = Tuple.Create(0, maskInformation.Item2);
 				}
 			}
 		}
@@ -43,21 +42,21 @@ public class Stock
 		double tempProfit = 0.0;
 		double cost = 0;
 		double profit = 0;
-		foreach (var mask in this.inventory)
+		foreach (var maskInformation in _inventory)
 		{
 			while (quantity > 0)
 			{
-				if (mask.Item1 >= quantity)
+				if (maskInformation.Item1 >= quantity)
 				{
-					cost = mask.Item2 * quantity + tempCost;
+					cost = maskInformation.Item2 * quantity + tempCost;
 					profit = quantity * price + tempProfit;
 					return profit - cost;
 				}
 				else
 				{
-					tempCost = mask.Item1 * mask.Item2;
-					tempProfit = mask.Item1 * price;
-					quantity -= mask.Item1;
+					tempCost = maskInformation.Item1 * maskInformation.Item2;
+					tempProfit += maskInformation.Item1 * price;
+					quantity -= maskInformation.Item1;
 				}
 			}
 			return profit - cost;
@@ -67,15 +66,15 @@ public class Stock
 
 	public int NumOfSold()
 	{
-		return this.countOfMasksSold;
+		return _countOfMasksSold;
 	}
 
-	public string ToString()
+	public override string ToString()
 	{
 		string finalString = "";
 		for (int i = 0; i < 5; i++)
 		{
-			finalString += string.Format("From stock number {0} there are {1} masks\n", i + 1, this.inventory[i].Item1);
+			finalString += $"From stock number {i + 1} there are {_inventory[i].Item1} masks{Environment.NewLine}";
 		}
 		return finalString;
 	}
